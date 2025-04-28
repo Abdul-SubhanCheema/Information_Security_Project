@@ -58,3 +58,7 @@ python app.py
 ```
 http://localhost:5000
 ```
+
+## License
+
+This project is for educational purposes and does not include a specific license. Use and modify the code as needed for learning or experimentation. For production use, consult the licenses of the dependencies (flask, oqs, cryptography, etc.).
