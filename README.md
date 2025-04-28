@@ -27,3 +27,17 @@ This project demonstrates a simple cryptographic system that is designed to be r
 ├── README.md                   # This file
 └── requirements.txt            # Python dependencies
 ```
+## Running the Application
+
+### Activate the Virtual Environment (if not already activated):
+```
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+### Run the Application
+```
+python app.py
+```
+### Access the Application: Open a web browser and navigate to:
+```
+http://localhost:5000
+```
