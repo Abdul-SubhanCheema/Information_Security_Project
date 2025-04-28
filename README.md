@@ -11,6 +11,7 @@ This project demonstrates a simple cryptographic system that is designed to be r
 - **Error Handling**: Provides clear error messages for invalid inputs, mismatched ciphertexts, and decryption failures.
 - **Educational Purpose**: Displays keys and secrets for learning, with warnings about production use.
 ## Folder Structure
+```
   quantum-crypto-demo/
 │
 ├── static/
@@ -25,3 +26,4 @@ This project demonstrates a simple cryptographic system that is designed to be r
 ├── app.py                      # Main Flask application with routes and logic
 ├── README.md                   # This file
 └── requirements.txt            # Python dependencies
+```
