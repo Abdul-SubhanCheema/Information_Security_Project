@@ -27,6 +27,23 @@ This project demonstrates a simple cryptographic system that is designed to be r
 ├── README.md                   # This file
 └── requirements.txt            # Python dependencies
 ```
+
+## Installation
+### Clone the Repository 
+```
+git clone <repository-url>
+cd <main folder>
+```
+### Create a Virtual Environment:
+```
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+### Install Dependencies 
+```
+pip install -r requirements.txt
+```
+
 ## Running the Application
 
 ### Activate the Virtual Environment (if not already activated):
