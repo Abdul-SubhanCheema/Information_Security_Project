@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  color: white;
+  padding: 3rem 0;
+}
+
+.header h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.header .lead {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-header {
+  font-weight: 600;
+  font-size: 1.25rem;
+  border-bottom: none;
+  padding: 1rem 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Buttons */
+.btn-custom {
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-custom:hover {
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-secondary {
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Key Display */
+.key-display {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  word-break: break-all;
+  background-color: #f1f3f5;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 1rem;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+/* Textarea */
+.custom-textarea {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.custom-textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Alerts */
+.alert {
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.alert-dismissible .btn-close {
+  padding: 1rem;
+}
+
+/* Animations */
+.animate-fade {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+  .header h1 {
+      font-size: 2rem;
+  }
+
+  .header .lead {
+      font-size: 1rem;
+  }
+
+  .card-header {
+      font-size: 1.1rem;
+  }
+
+  .btn-custom {
+      padding: 0.5rem 1rem;
+  }
+
+  .key-display {
+      font-size: 0.85rem;
+  }
+}

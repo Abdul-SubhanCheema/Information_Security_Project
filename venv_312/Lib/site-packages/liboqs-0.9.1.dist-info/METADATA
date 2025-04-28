@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: liboqs
+Version: 0.9.1
+Summary: Unofficial liboqs-python library with precompiled liboqs libraries
+Home-page: https://github.com/FunDan3/liboqs-python-pip/
+Author: Fun_Dan3
+Author-email: dfr34560@gmail.com
+Project-URL: Bug Tracker, https://github.com/FunDan3/liboqs-python-pip/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# liboqs-python-pip
+Version of liboqs-python that is compatible with pip and has liboqs library built in
