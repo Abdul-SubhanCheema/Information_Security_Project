@@ -11,10 +11,9 @@ from cryptography.hazmat.primitives import padding
 from cryptography.exceptions import InvalidTag
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Secure random secret key
+app.secret_key = os.urandom(24)  
 csrf = CSRFProtect(app)
 
-# Configure Talisman for secure HTTP headers
 csp = {
     'default-src': '\'self\'',
     'script-src': ['\'self\'', 'https://cdn.jsdelivr.net', '\'unsafe-inline\''],
@@ -38,31 +37,30 @@ talisman = Talisman(
     x_xss_protection=True
 )
 
-# Global variable to store kem instance (temporary for demonstration; not production-safe)
 stored_kem = None
 
 def base64_encode(data):
-    """Convert binary data to base64 string."""
+    
     if isinstance(data, bytes):
         return base64.b64encode(data).decode('utf-8')
     return base64.b64encode(data.encode('utf-8')).decode('utf-8')
 
 def base64_decode(data):
-    """Convert base64 string to binary data."""
+    
     try:
         return base64.b64decode(data.encode('utf-8'), validate=True)
     except base64.binascii.Error:
         raise ValueError("Invalid base64-encoded ciphertext")
 
 def generate_keypair():
-    """Generate Kyber512 key pair."""
+
     kem = KeyEncapsulation("Kyber512")
-    public_key = kem.generate_keypair()  # Generates public key and associates secret key with kem
-    secret_key = kem.export_secret_key()  # Export secret key if supported
-    return public_key, secret_key, kem  # Return kem instance to reuse for decryption
+    public_key = kem.generate_keypair()  
+    secret_key = kem.export_secret_key()  
+    return public_key, secret_key, kem  
 
 def encrypt_with_key(public_key, message):
-    """Encrypt a message using Kyber512 KEM and AES-GCM."""
+    
     kem = KeyEncapsulation("Kyber512")
     ciphertext, shared_secret = kem.encap_secret(public_key)
     
@@ -85,13 +83,13 @@ def encrypt_with_key(public_key, message):
     return ciphertext, shared_secret, encrypted_message
 
 def decrypt_with_key(ciphertext, encrypted_message, kem):
-    """Decrypt using Kyber512 secret key."""
+    
     try:
-        # Validate encrypted_message length
+        
         if len(encrypted_message) < 28:
             raise ValueError("Encrypted message is too short to contain IV and tag")
         
-        # Decapsulate the shared secret
+        
         try:
             shared_secret = kem.decap_secret(ciphertext)
         except Exception as e:
@@ -126,20 +124,19 @@ class DecryptForm(FlaskForm):
 
 @app.route('/')
 def index():
-    """Render the main page."""
+    
     encrypt_form = EncryptForm()
     decrypt_form = DecryptForm()
     return render_template('index.html', encrypt_form=encrypt_form, decrypt_form=decrypt_form)
 
 @app.route('/generate_keys', methods=['POST'])
 def generate_keys():
-    """Generate and store Kyber512 key pair."""
+    
     public_key, secret_key, kem = generate_keypair()
     
     session['public_key'] = base64_encode(public_key)
     session['secret_key'] = base64_encode(secret_key)
     
-    # Store kem instance globally (temporary for demonstration; not production-safe)
     global stored_kem
     stored_kem = kem
     
@@ -153,7 +150,7 @@ def generate_keys():
 
 @app.route('/encrypt', methods=['POST'])
 def encrypt():
-    """Encrypt using Kyber512 public key."""
+    
     encrypt_form = EncryptForm()
     decrypt_form = DecryptForm()
     if not encrypt_form.validate_on_submit():
@@ -196,7 +193,7 @@ def encrypt():
 
 @app.route('/decrypt', methods=['POST'])
 def decrypt():
-    """Decrypt using Kyber512 secret key."""
+    
     encrypt_form = EncryptForm()
     decrypt_form = DecryptForm()
     if not decrypt_form.validate_on_submit():
@@ -212,7 +209,7 @@ def decrypt():
                               error="Please generate keys first")
     
     try:
-        global stored_kem  # Use the stored kem instance
+        global stored_kem  
         if not stored_kem:
             return render_template('index.html', 
                                   encrypt_form=encrypt_form,
@@ -221,7 +218,7 @@ def decrypt():
                                   public_key=session.get('public_key', ''),
                                   secret_key=session.get('secret_key', ''))
         
-        # Validate and decode ciphertext
+        
         ciphertext_input = decrypt_form.ciphertext.data
         ciphertext = base64_decode(ciphertext_input)
         
@@ -236,7 +233,7 @@ def decrypt():
         
         encrypted_message = base64_decode(session['encrypted_message'])
         
-        # Validate that the provided ciphertext matches the session ciphertext
+        
         session_ciphertext = session.get('ciphertext', '')
         if base64_encode(ciphertext) != session_ciphertext:
             return render_template('index.html', 
